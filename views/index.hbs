@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Blogging</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway:400,800,900" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <nav class="heading-bar blue-grey darken-2">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Blog of Books</a>
+        </div>
+    </nav>
+    <section class="login">
+        <div class="row loginRow">
+            <div class="col m4"></div>
+            <div class="col s12 m4">
+                <div class="card-panel blue-grey darken-2 center">
+                    <form class="row white-text login-input" method="post">
+                        <div class="input-field col s11">
+                            <input id="first_name2" type="text" class="validate" name="username">
+                            <label class="active white-text" for="first_name2">User Name: </label>
+                        </div>
+                        <div class="input-field col s11 login-input">
+                            <input type="password" class="validate" name="password">
+                            <label class="active white-text" for="first_name2">Password: </label>
+                        </div>
+                        <button class="btn waves-effect waves-light login-btn blue-grey lighten-5 grey-text">Login</button>
+                    </form>
+                    <p class="red-text">{{error}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row newRow">
+          <div class="col m4"></div>
+            <div class="col s12 m4">
+                <div class="card-panel blue-grey darken-2 center">
+                    <p>Need an account?</p>
+                    <a href="newuser"><button class="btn waves-effect waves-light login-btn blue-grey lighten-5 grey-text">Sign Up</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

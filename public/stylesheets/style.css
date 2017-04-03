@@ -1,0 +1,65 @@
+.heading-bar {
+  width: 100vw;
+  font-family: 'Raleway', sans-serif;
+}
+
+.brand-logo {
+  margin-left: 25px;
+}
+
+.loginRow {
+  height:35vh;
+  margin-top: 3em;
+  display: block;
+}
+
+.newRow {
+  display: block;
+  margin-top: 1em;
+  padding: 12px;
+}
+
+.login {
+  font-family: 'Raleway', sans-serif;
+  padding-top: 3em;
+}
+
+h3 {
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-input {
+  margin-top: 1.5em;
+  display: inline-block;
+}
+
+.login-btn {
+  font-size: 20px;
+}
+
+.btn {
+  display: block;
+  margin: 1em auto;
+}
+
+a {
+  color: white;
+}
+
+.title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-style: .5em;
+}
+
+.paragraph {
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.ed {
+  margin-right: 2em;
+}
+
+.content-text {
+  height: 55vh;
+}
