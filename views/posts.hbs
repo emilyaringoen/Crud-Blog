@@ -37,9 +37,21 @@
         <h3 class="title" id=`blog{{this.id}}`>{{this.title}}</h3>
         <p class="paragraph">{{this.content}}</p>
         <div class="row">
-          <div class="col m7"></div>
+          <p class="col m2">{{this.post_author}}</p>
+          <p class="col m2">{{this.pca}}</p>
+          <div class="col m3"></div>
           <a class="waves-effect waves-light btn col m2 ed blue-grey lighten-5 grey-text" id="edit">Edit</a>
           <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text" data-id="{{this.id}}" id="delete">Delete</a>
+        </div>
+        <hr>
+        <div class="comments row">
+          <div class="col m4"></div>
+          <div class="col m4">
+            <p>{{this.comment}}</p>
+          </div>
+          <div class="col m4">
+            <p>{{this.cca}}</p>
+          </div>
         </div>
         <hr>
       {{/each}}

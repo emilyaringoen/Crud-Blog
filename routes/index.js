@@ -7,6 +7,12 @@ const saltrounds = 10
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+  if (req.query.unauthorized) {
+    console.log(req.query.unauthorized);
+    res.render('index', {
+      error: 'Unauthorized: please login.'
+    })
+  }
   res.render('index');
 });
 
@@ -26,9 +32,16 @@ router.post('/', (req, res, next) => {
       .then((data) => {
         bcrypt.compare(password, data[0].password, (err, boolean) => {
           if (boolean) {
-            let token = jwt.sign({ username: data[0].username, password: data[0].password }, 'shhhh')
-            res.cookie('token', token, { httpOnly:true })
-            res.cookie('userID', data[0].id, { httpOnly:true })
+            let token = jwt.sign({
+              username: data[0].username,
+              password: data[0].password
+            }, 'shhhh', { expiresIn: '1h' })
+            res.cookie('token', token, {
+              httpOnly: true
+            })
+            res.cookie('userID', data[0].id, {
+              httpOnly: true
+            })
             res.redirect('/posts')
           } else {
             res.render('index', {

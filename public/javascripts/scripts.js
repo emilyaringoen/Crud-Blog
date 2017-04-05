@@ -12,4 +12,12 @@ $(document).ready(() => {
         }
       })
     })
+
+    $('#edit').on('click', () => {
+      $.ajax({
+        method: 'UPDATE',
+        url: '',
+        data: { id: $('#edit').attr('data-id')}
+      })
+    })
 })
