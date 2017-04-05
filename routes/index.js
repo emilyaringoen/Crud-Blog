@@ -25,30 +25,35 @@ router.post('/', (req, res, next) => {
     })
   } else {
     knex('users')
-      .where({
-        username: username
-      })
+      .where('username', username)
       .select()
       .then((data) => {
-        bcrypt.compare(password, data[0].password, (err, boolean) => {
-          if (boolean) {
-            let token = jwt.sign({
-              username: data[0].username,
-              password: data[0].password
-            }, 'shhhh', { expiresIn: '1h' })
-            res.cookie('token', token, {
-              httpOnly: true
-            })
-            res.cookie('userID', data[0].id, {
-              httpOnly: true
-            })
-            res.redirect('/posts')
-          } else {
-            res.render('index', {
-              error: 'Username & Password Incorrect'
-            })
-          }
-        })
+        if (data.length > 0) {
+          bcrypt.compare(password, data[0].password, (err, boolean) => {
+            if (boolean) {
+              let token = jwt.sign({
+                username: data[0].username,
+                password: data[0].password
+              }, 'shhhh', { expiresIn: '1h' })
+              res.cookie('token', token, {
+                httpOnly: true
+              })
+              res.cookie('userID', data[0].id, {
+                httpOnly: true
+              })
+              res.redirect('/posts')
+            } else {
+              console.log('here');
+              res.render('index', {
+                error: 'Username or Password Incorrect'
+              })
+            }
+          })
+        } else {
+          res.render('index', {
+            error: 'Username or Password Incorrect'
+          })
+        }
       })
   }
 })

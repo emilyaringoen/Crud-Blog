@@ -64,23 +64,32 @@
                 <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text" data-id="{{this.post_id}}" id="delete">Delete</a>
             </div>
             <hr>
-            <div class="comments row">
-                <div class="col m4"></div>
-                <div class="col m4">
-                    <p>{{this.comment}}</p>
+            {{#each this.comment}}
+                <div class="comments row">
+                    <div class="col m6 offset-m4">
+                        <p>{{this.com}}</p>
+                    </div>
                 </div>
-                <div class="col m4">
-                    <p>{{this.cca}}</p>
+                <div class="row">
+                    <div class="col m2 offset-m4">
+                        <p>{{this.comment_author}}</p>
+                    </div>
+                    <div class="col m2">
+                        <p>{{this.cca}}</p>
+                    </div>
                 </div>
-            </div>
+                <hr>
+            {{/each}}
             <div class="addComment">
                 <div class="row">
-                    <div class="input-field col m6 offset-m4">
-                        <input type="text" class="validate" placeholder="Add Comment">
-                    </div>
-                    <div class="col m1">
-                        <a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">add</i></a>
-                    </div>
+                    <form class="" action="index.html" method="post">
+                        <div class="input-field col m6 offset-m4">
+                            <input type="text" class="validate" placeholder="Add Comment" id="{{this.post_id}}" name="comment">
+                        </div>
+                        <div class="col m1">
+                            <a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">add</i></a>
+                        </div>
+                    </form>
                 </div>
             </div>
             <hr>
