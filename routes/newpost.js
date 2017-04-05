@@ -23,11 +23,13 @@ router.get('/', (req, res, next) => {
 })
 
   router.post('/', (req, res, next) => {
+    let now = new Date()
     knex('posts')
       .insert({
         title: req.body.title,
         content: req.body.content,
-        user_id: req.cookies.userID
+        user_id: req.cookies.userID,
+        updated_at: now
       }).then((post) => {
         res.redirect('posts')
       })

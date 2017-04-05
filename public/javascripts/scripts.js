@@ -1,11 +1,16 @@
 $(document).ready(() => {
+    $('.modal').modal();
+
     $('#delete').on('click', () => {
+      console.log('delete clicked');
       $.ajax({
         method: 'DELETE',
         url: '',
         data: { id: $('#delete').attr('data-id') },
         success: (data) => {
-          location.reload();
+          if(data){
+            location.reload();
+          }
         },
         error: () => {
 
@@ -13,11 +18,20 @@ $(document).ready(() => {
       })
     })
 
-    $('#edit').on('click', () => {
+    $('#update').on('click', () => {
+      let id = $(event.target).attr('data-id')
       $.ajax({
-        method: 'UPDATE',
+        method: 'PUT',
         url: '',
-        data: { id: $('#edit').attr('data-id')}
+        data: { id: id, title: $(`#title${id}`).val(), content: $(`#content${id}`).val() },
+        success: (data) => {
+          if(data){
+            location.reload();
+          }
+        },
+        error: () => {
+
+        }
       })
     })
 })

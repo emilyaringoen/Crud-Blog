@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Raleway:400,800,900" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
     <script src="/javascripts/scripts.js" type="text/javascript"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
@@ -32,29 +32,59 @@
         </div>
     </nav>
     <section class="container">
-      <h1>Blog Posts</h1>
-      {{#each data}}
-        <h3 class="title" id=`blog{{this.id}}`>{{this.title}}</h3>
-        <p class="paragraph">{{this.content}}</p>
-        <div class="row">
-          <p class="col m2">{{this.post_author}}</p>
-          <p class="col m2">{{this.pca}}</p>
-          <div class="col m3"></div>
-          <a class="waves-effect waves-light btn col m2 ed blue-grey lighten-5 grey-text" id="edit">Edit</a>
-          <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text" data-id="{{this.id}}" id="delete">Delete</a>
-        </div>
-        <hr>
-        <div class="comments row">
-          <div class="col m4"></div>
-          <div class="col m4">
-            <p>{{this.comment}}</p>
-          </div>
-          <div class="col m4">
-            <p>{{this.cca}}</p>
-          </div>
-        </div>
-        <hr>
-      {{/each}}
+        <h1>Blog Posts</h1>
+        {{#each data}}
+            <h3 class="title" id=`blog {{this.id}} `>{{this.title}}</h3>
+            <p class="paragraph">{{this.content}}</p>
+            <div class="row">
+                <p class="col m2">{{this.post_author}}</p>
+                <p class="col m2">{{this.pca}}</p>
+                <div class="col m3"></div>
+                <a class="waves-effect waves-light btn col m2 ed blue-grey lighten-5 grey-text" href="#modal{{this.post_id}}">Edit</a>
+                <section id="modal{{this.post_id}}" class="modal">
+                    <article class="modal-content">
+                        <h4>Edit Post</h4>
+                        <section class="container updatePost">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input type="text" class="validate" name="title" value="{{this.title}}" id="title{{this.post_id}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea name="content" class="content-text" id="content{{this.post_id}}">{{this.content}}</textarea>
+                                    </div>
+                                </div>
+                                <button class="btn waves-effect waves-light blue-grey lighten-5 grey-text modal-action modal-close" data-id="{{this.post_id}}" id="update">Submit</button>
+                            </div>
+                        </section>
+                    </article>
+                </section>
+                <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text" data-id="{{this.post_id}}" id="delete">Delete</a>
+            </div>
+            <hr>
+            <div class="comments row">
+                <div class="col m4"></div>
+                <div class="col m4">
+                    <p>{{this.comment}}</p>
+                </div>
+                <div class="col m4">
+                    <p>{{this.cca}}</p>
+                </div>
+            </div>
+            <div class="addComment">
+                <div class="row">
+                    <div class="input-field col m6 offset-m4">
+                        <input type="text" class="validate" placeholder="Add Comment">
+                    </div>
+                    <div class="col m1">
+                        <a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">add</i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {{/each}}
     </section>
 
 </body>
