@@ -82,12 +82,13 @@
             {{/each}}
             <div class="addComment">
                 <div class="row">
-                    <form class="" action="index.html" method="post">
+                    <form class="" method="post">
                         <div class="input-field col m6 offset-m4">
-                            <input type="text" class="validate" placeholder="Add Comment" id="{{this.post_id}}" name="comment">
+                            <input type="text" class="validate" placeholder="Add Comment" name="comment">
                         </div>
                         <div class="col m1">
-                            <a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="material-icons">add</i></a>
+                            <button class="btn-floating btn-large waves-effect waves-light blue-grey " name="{{this.post_id}}" type="submit"><i class="material-icons">add</i></button>
+
                         </div>
                     </form>
                 </div>

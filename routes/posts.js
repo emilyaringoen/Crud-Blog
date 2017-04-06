@@ -18,6 +18,7 @@ router.get('/', (req, res, next) => {
     }
   })
 });
+// WholePost functions
 
 function postAndAuthor() {
   return knex('posts')
@@ -60,13 +61,19 @@ function wholePost() {
 }
 
 router.post('/', (req, res, next) => {
+  let first = Object.keys(req.body)[0]
   knex('comments')
     .insert({
       comment: req.body.comment,
       user_id: req.cookies.userID,
-      post_id: 1
+      post_id: first
     }).then((data) => {
-      res.render('/')
+      wholePost()
+        .then((posts) => {
+          res.render('posts', {
+            'data': posts
+          })
+        })
     })
 })
 
