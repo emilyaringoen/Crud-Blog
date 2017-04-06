@@ -31,7 +31,7 @@ router.get('/', (req, res, next) => {
         user_id: req.cookies.userID,
         updated_at: now
       }).then((post) => {
-        res.redirect('posts')
+        res.redirect('/posts')
       })
   })
 })

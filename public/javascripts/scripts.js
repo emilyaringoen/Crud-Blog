@@ -1,26 +1,24 @@
 $(document).ready(() => {
   $('.modal').modal();
 
-  $('#delete').on('click', () => {
-    console.log('delete clicked');
+  $('.delete').on('click', () => {
     $.ajax({
       method: 'DELETE',
       url: '',
       data: {
-        id: $('#delete').attr('data-id')
+        id: $(event.target).attr('data-id'),
+        del: 'post'
       },
       success: (data) => {
         if (data) {
           location.reload();
         }
       },
-      error: () => {
-
-      }
+      error: () => {}
     })
   })
 
-  $('#update').on('click', () => {
+  $('.update').on('click', () => {
     let id = $(event.target).attr('data-id')
     $.ajax({
       method: 'PUT',
@@ -38,6 +36,24 @@ $(document).ready(() => {
       error: () => {
 
       }
+    })
+  })
+
+  $('.delete_comment').on('click', () => {
+    let id = $(event.target).attr('data-id')
+    $.ajax({
+      method: 'DELETE',
+      url: '',
+      data: {
+        id: id,
+        del: 'comment'
+      },
+      success: (data) => {
+        if (data) {
+          location.reload();
+        }
+      },
+      error: () => {}
     })
   })
 

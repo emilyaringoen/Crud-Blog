@@ -56,26 +56,28 @@
                                         <textarea name="content" class="content-text" id="content{{this.post_id}}">{{this.content}}</textarea>
                                     </div>
                                 </div>
-                                <button class="btn waves-effect waves-light blue-grey lighten-5 grey-text modal-action modal-close" data-id="{{this.post_id}}" id="update">Submit</button>
+                                <button class="btn waves-effect waves-light blue-grey lighten-5 grey-text modal-action modal-close update" data-id="{{this.post_id}}">Submit</button>
                             </div>
                         </section>
                     </article>
                 </section>
-                <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text" data-id="{{this.post_id}}" id="delete">Delete</a>
+                <a class="waves-effect waves-light btn col m2 blue-grey lighten-5 grey-text delete" data-id="{{this.post_id}}">Delete</a>
             </div>
             <hr>
+            <h6>Comments:</h6>
             {{#each this.comment}}
                 <div class="comments row">
-                    <div class="col m6 offset-m4">
+                    <div class="col m6 offset-m1">
                         <p>{{this.com}}</p>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col m2 offset-m4">
+                    <div class="col m2">
                         <p>{{this.comment_author}}</p>
                     </div>
                     <div class="col m2">
                         <p>{{this.cca}}</p>
+                    </div>
+                    <div class="col m1">
+                        <a class="btn-floating btn-large blue-grey delete_comment" data-id="{{this.c_id}}">X</a>
                     </div>
                 </div>
                 <hr>
@@ -88,7 +90,6 @@
                         </div>
                         <div class="col m1">
                             <button class="btn-floating btn-large waves-effect waves-light blue-grey " name="{{this.post_id}}" type="submit"><i class="material-icons">add</i></button>
-
                         </div>
                     </form>
                 </div>

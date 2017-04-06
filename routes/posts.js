@@ -7,10 +7,12 @@ const jwt = require('jsonwebtoken')
 router.get('/', (req, res, next) => {
   jwt.verify(req.cookies.token, 'shhhh', (err, decoded) => {
     if (decoded) {
+      // console.log(decoded);
       wholePost()
         .then((posts) => {
+          // console.log(posts);
           res.render('posts', {
-            'data': posts
+            data: posts
           })
         })
     } else {
@@ -18,11 +20,10 @@ router.get('/', (req, res, next) => {
     }
   })
 });
-// WholePost functions
 
 function postAndAuthor() {
   return knex('posts')
-    .join('users', 'users.id', '=', 'posts.user_id')
+    .join('users', 'users.id', 'posts.user_id')
     .select('posts.id as post_id', 'posts.title', 'posts.content', 'users.username as post_author', 'posts.updated_at as pca')
     .where('deleted', false)
     .orderBy('pca', 'DESC')
@@ -37,7 +38,7 @@ function postAndAuthor() {
 function commentAndPost(posts) {
   return Promise.all(posts.map((post) => {
     return knex('comments')
-      .select('users.username as comment_author', 'comment as com', 'comments.updated_at as cca')
+      .select('users.username as comment_author', 'comment as com', 'comments.updated_at as cca', 'comments.id as c_id')
       .join('users', 'users.id', '=', 'comments.user_id')
       .where('post_id', post.post_id)
       .then((data) => {
@@ -52,7 +53,6 @@ function commentAndPost(posts) {
         }
       })
   }))
-
 }
 
 function wholePost() {
@@ -67,18 +67,13 @@ router.post('/', (req, res, next) => {
       comment: req.body.comment,
       user_id: req.cookies.userID,
       post_id: first
-    }).then((data) => {
-      wholePost()
-        .then((posts) => {
-          res.render('posts', {
-            'data': posts
-          })
-        })
+    }).then(() => {
+      res.redirect('/posts')
     })
 })
 
 router.put('/', (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   let now = new Date()
   let id = Number.parseInt(req.body.id)
   knex('posts')
@@ -94,18 +89,34 @@ router.put('/', (req, res, next) => {
 })
 
 router.delete('/', (req, res, next) => {
+  console.log('in the delete');
   let id = Number.parseInt(req.body.id)
-  knex('posts')
+  if (req.body.del === 'post') {
+    knex('posts')
     .where('id', id)
     .update({
       deleted: true
     }).then((post) => {
       return knex('posts')
-        .where('deleted', false)
-        .then(() => {
-          res.status(200).send(true);
-        })
+      .where('deleted', false)
+      .then(() => {
+        res.status(200).send(true);
+      })
     })
+  } else if (req.body.del === 'comment'){
+    console.log(id);
+    knex('comments')
+    .where('id', id)
+    .del()
+    .then(() => {
+      console.log('in knex');
+      return knex('comments')
+      .then(() => {
+        console.log('true sent back');
+        res.status(200).send(true);
+      })
+    })
+  }
 })
 
 
